@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -177,20 +177,29 @@
 
     <section class="logo-section">
         <div class="logo-wrapper">
-            <div class="marquee" id="marquee">
-                <div class="marquee-track" id="track">
-                    <img src="assets/images/work-1.png">
-                    <img src="assets/images/work-2.png">
-                    <img src="assets/images/work-3.png">
-                    <img src="assets/images/work-4.png">
-                    <img src="assets/images/work-5.png">
-                    <img src="assets/images/work-6.png">
-                    <img src="assets/images/work-7.png">
-                    <img src="assets/images/work-8.png">
-                </div>
+            <div class="marquee">
+            <div class="marquee-track">
+                <img src="assets/images/work-1.png">
+                <img src="assets/images/work-2.png">
+                <img src="assets/images/work-3.png">
+                <img src="assets/images/work-4.png">
+                <img src="assets/images/work-5.png">
+                <img src="assets/images/work-6.png">
+                <img src="assets/images/work-7.png">
+                <img src="assets/images/work-8.png">
+                <img src="assets/images/work-1.png">
+                <img src="assets/images/work-2.png">
+                <img src="assets/images/work-3.png">
+                <img src="assets/images/work-4.png">
+                <img src="assets/images/work-5.png">
+                <img src="assets/images/work-6.png">
+                <img src="assets/images/work-7.png">
+                <img src="assets/images/work-8.png">
+            </div>
             </div>
         </div>
     </section>
+
 
 
     <section class="apart-section" id="about">
@@ -1368,6 +1377,16 @@ initializeFormValidation();
             resizeTimer = setTimeout(setupMarquee, 200);
         });
         window.addEventListener('load', setupMarquee);
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.marquee-track');
+            if (!track) return;
+
+            // Clone the logos to create the second half of the track
+            const clone = track.innerHTML;
+            track.innerHTML += clone;
+        });
     </script>
 </body>
 </html>
