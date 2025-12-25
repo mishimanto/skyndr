@@ -685,7 +685,7 @@ body {
 
 .trust-tab {
     font-family: 'Montserrat', sans-serif !important;
-    padding: 18px;
+    padding: 12px 16px;
     border: 1px solid #565454;
     background: none;
     font-size: 18px;
@@ -765,6 +765,40 @@ body {
     width: 15px;
     height: 15px;
 }
+
+@media (max-width: 768px) {
+    .trust-tabs {
+        justify-content: flex-start;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        gap: 12px;
+
+        padding: 10px 16px;
+        margin-bottom: 30px;
+
+        /* Smooth mobile scrolling */
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+
+        /* Optional snap */
+        scroll-snap-type: x mandatory;
+    }
+
+    .trust-tabs::-webkit-scrollbar {
+        display: none; /* Hide scrollbar */
+    }
+
+    .trust-tab {
+        flex: 0 0 auto; /* Prevent shrinking */
+        width: auto;
+        min-width: 140px;
+        height: 50px;
+        font-size: 14px;
+
+        scroll-snap-align: start;
+    }
+}
+
 
 /* trust */
 #trustImage, #trustTitle, #trustText, #trustAuthor {
