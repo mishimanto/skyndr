@@ -175,7 +175,7 @@
     </section>
 
 
-    <section class="logo-section">
+    <!-- <section class="logo-section">
         <div class="logo-wrapper">
             <div class="marquee">
                 <div class="marquee-track" id="marqueeTrack">
@@ -188,6 +188,31 @@
                     <img src="assets/images/work-7.png">
                     <img src="assets/images/work-8.png">
                 </div>
+            </div>
+        </div>
+    </section> -->
+
+    <section class="logo-section">
+        <div class="logo-wrapper">
+            <div class="marquee">
+            <div class="marquee-track">
+                <img src="assets/images/work-1.png">
+                <img src="assets/images/work-2.png">
+                <img src="assets/images/work-3.png">
+                <img src="assets/images/work-4.png">
+                <img src="assets/images/work-5.png">
+                <img src="assets/images/work-6.png">
+                <img src="assets/images/work-7.png">
+                <img src="assets/images/work-8.png">
+                <img src="assets/images/work-1.png">
+                <img src="assets/images/work-2.png">
+                <img src="assets/images/work-3.png">
+                <img src="assets/images/work-4.png">
+                <img src="assets/images/work-5.png">
+                <img src="assets/images/work-6.png">
+                <img src="assets/images/work-7.png">
+                <img src="assets/images/work-8.png">
+            </div>
             </div>
         </div>
     </section>
@@ -907,34 +932,45 @@
     });
     </script>
 
-   <script>
-    document.addEventListener('DOMContentLoaded', () => {
-        const track = document.getElementById('marqueeTrack');
-        if (!track) return;
+   <!-- <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.getElementById('marqueeTrack');
+            if (!track) return;
 
-        // Duplicate the content for seamless looping
-        track.innerHTML += track.innerHTML;
+            // Duplicate the content for seamless looping
+            track.innerHTML += track.innerHTML;
 
-        let position = 0;
-        const speed = 5;  // Small value = ultra-smooth movement (adjust 0.5–1.5 for desired speed)
+            let position = 0;
+            const speed = 5;  // Small value = ultra-smooth movement (adjust 0.5–1.5 for desired speed)
 
-        const singleSetWidth = () => track.scrollWidth / 2;
+            const singleSetWidth = () => track.scrollWidth / 2;
 
-        function animate() {
-            position -= speed;
+            function animate() {
+                position -= speed;
 
-            // Seamless reset: use modulo-like logic without jumping to 0
-            if (position <= -singleSetWidth()) {
-                position += singleSetWidth();  // Shift forward by exactly one set
+                // Seamless reset: use modulo-like logic without jumping to 0
+                if (position <= -singleSetWidth()) {
+                    position += singleSetWidth();  // Shift forward by exactly one set
+                }
+
+                track.style.transform = `translateX(${position}px)`;
+                requestAnimationFrame(animate);
             }
 
-            track.style.transform = `translateX(${position}px)`;
-            requestAnimationFrame(animate);
-        }
+            animate();
+        });
+    </script> -->
 
-        animate();
-    });
-</script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const track = document.querySelector('.marquee-track');
+            if (!track) return;
+
+            // Clone the logos to create the second half of the track
+            const clone = track.innerHTML;
+            track.innerHTML += clone;
+        });
+    </script>
 
 
 
