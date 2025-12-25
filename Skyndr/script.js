@@ -74,86 +74,63 @@ document.querySelectorAll(".service-slider").forEach((slider) => {
 const trustData = {
     kdx: {
         title: "Ads Management + Strategy",
-        text: `We've been partnering with Skyndr for nearly a year now, and their impact on our ad performance has been outstanding.
-                From the very beginning, they took the time to understand our brand, our audience, and our goals and then built campaigns that actually delivered results.<br><br>
-
-                What sets Skyndr apart is their strategic approach.They don't just run ads; they constantly analyze, test, and optimize every detail to make sure each
-                dollar spent creates real growth.Their transparency and clear communication have made the entire process smooth and stress free.<br><br>
-
-                We've worked with othermarketing agencies before, but none have matched Skyndr's level of expertise, attention to detail, and commitment to seeing us succeed.`,
+        text: `We've been partnering with Skyndr for nearly a year now, and their impact on our ad performance has been outstanding. From the very beginning, they took the time to understand our brand, our audience, and our goals and then built campaigns that actually delivered results.<br><br>What sets Skyndr apart is their strategic approach. They don't just run ads; they constantly analyze, test, and optimize every detail to make sure each dollar spent creates real growth.`,
         author: "Odai, Founder of KDX Middle East",
         image: "assets/images/whyus.png"
     },
     washclub: {
         title: "Paid Social",
-        text: `We've worked with Skyndr for several months now, and the difference in our paid social results has been incredible.
-                Their team took over our Meta ads, optimized our funnels, and even improved parts of our website to help increase conversions.<br><br>
-
-                What stood out most is how proactive they are.They constantly share updates, data, and new ideas to push results even further.
-                Their mix of creativity and analytical thinking is exactly what our brand needed.<br><br>
-
-                After working with multiple agencies over the years, Skyndr has easily been the most effective, responsive, and genuinely invested team we've partnered with.`,
+        text: `We've worked with Skyndr for several months now, and the difference in our paid social results has been incredible. Their team took over our Meta ads, optimized our funnels, and even improved parts of our website to help increase conversions.`,
         author: "Mahmoud CEO of Washclub",
-        image: "assets/images/washclub.png"
+        image: "assets/images/whyus2.jpg"
     },
     luster: {
         title: "Full-Service Marketing (Strategy + Ads + UGC)",
-        text: `Our partnership with Skyndr has completely transformed our online presence. From ad strategy to creative production and content testing,
-                they've managed every detail with precision and passion.<br><br>
-
-                Their ability to combine data driven decision- making with strong creative direction is what makes them stand out. Every member of the team brings something valuable
-                to the table, and they always make sure we understand the strategy behind the work.<br><br>
-
-                We've seen steady growth in both traffic and sales since working with Skyndr, and it’s clear they truly care about our success. For any business looking for a long - term
-                marketing partner who delivers both strategy and creativity, Skyndr is the one.`,
+        text: `Our partnership with Skyndr has completely transformed our online presence. From ad strategy to creative production and content testing, they've managed every detail with precision and passion.`,
         author: "Hassan Co-founder of Luster ",
-        image: "assets/images/luster.png"
+        image: "assets/images/whyus3.jpg"
     },
     sunguard: {
         title: "UGC Content + Creative Ads",
-        text: `Working with Skyndr on our creative ad strategy has been a game changer. They helped us completely revamp our content with fresh UGC-style videos and
-                authentic visuals that actually connect with our audience.<br><br>
-
-                Every deliverable was on time, high quality, and thoughtfully crafted.The team understood exactly how to balance performance marketing with storytelling,
-                something that's rare to find.<br><br>
-
-                Since partnering with Skyndr, our engagement and conversion rates have improved noticeably.They're not just another agency; they're a team that genuinely understands
-                how to make creative assets drive results.`,
+        text: `Working with Skyndr on our creative ad strategy has been a game changer. They helped us completely revamp our content with fresh UGC-style videos and authentic visuals that actually connect with our audience.`,
         author: "Saad CEO of Sunguard",
-        image: "assets/images/sunguard.png"
+        image: "assets/images/whyus4.jpg"
     },
     snake: {
         title: "Branding",
-        text: `Our experience with Skyndr on our paid social, branding, and content creation has been nothing short of amazing. They took our scattered online
-                presence and transformed it into a cohesive, high-performing brand that truly reflects who we are.<br><br>
-
-                Their team's expertise in content strategy, visual branding, and ad performance is unmatched.They walked us through everything — from messaging and brand identity to
-                ad creatives and campaign structure — and made sure we understood the purpose behind every move.<br><br>
-
-                What stood out most was how deeply they cared about the bigger picture.Skyndr didn't just run ads or design content; they helped us build a brand foundation built for
-                long - term growth.Their professionalism and creative insight have made them our go- to partner moving forward.`,
+        text: `Our experience with Skyndr on our paid social, branding, and content creation has been nothing short of amazing. They took our scattered online presence and transformed it into a cohesive, high-performing brand.`,
         author: "Ahmad Owner of Snake Protection",
-        image: "assets/images/snake.png"
+        image: "assets/images/whyus6.jpg"
     }
 };
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    trustTabs.forEach(tab => {
-        tab.addEventListener("click", () => {
-            trustTabs.forEach(t => t.classList.remove("active"));
-            tab.classList.add("active");
-
-            const key = tab.dataset.target;
+    const tabs = document.querySelectorAll(".trust-tab");
+    const imgEl = document.getElementById("trustImage");
+    const titleEl = document.getElementById("trustTitle");
+    const textEl = document.getElementById("trustText");
+    const authorEl = document.getElementById("trustAuthor");
+    if (!tabs.length || !imgEl) return;
+    tabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+            tabs.forEach(t => t.classList.remove("active"));
+            this.classList.add("active");
+            const key = this.getAttribute("data-target");
             const data = trustData[key];
-
-            trustImage.src = data.image;
-            trustTitle.textContent = data.title;
-            trustText.innerHTML = data.text;
-            trustAuthor.textContent = data.author;
+            if (data) {
+                titleEl.textContent = data.title;
+                textEl.innerHTML = data.text;
+                authorEl.textContent = data.author;
+                const imgLoader = new Image();
+                imgLoader.src = data.image;
+                imgEl.style.opacity = "0.2";
+                imgLoader.onload = () => {
+                    imgEl.src = data.image;
+                    imgEl.style.opacity = "1";
+                };
+                console.log("Loading image for:", key);
+            }
         });
     });
-
 });
 
 
