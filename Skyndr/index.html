@@ -177,8 +177,8 @@
 
     <section class="logo-section">
         <div class="logo-wrapper">
-            <div class="marquee" id="marquee">
-                <div class="marquee-track" id="track">
+            <div class="marquee">
+                <div class="marquee-track" id="marqueeTrack">
                     <img src="assets/images/work-1.png">
                     <img src="assets/images/work-2.png">
                     <img src="assets/images/work-3.png">
@@ -191,6 +191,7 @@
             </div>
         </div>
     </section>
+
 
 
     <section class="apart-section" id="about">
@@ -906,39 +907,36 @@
     });
     </script>
 
-        <script>
-            // Keep a reference to the track template OUTSIDE the function
-    const marquee = document.getElementById('marquee');
-    const trackTemplate = document.getElementById('track').cloneNode(true); 
+   <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('marqueeTrack');
+        if (!track) return;
 
-    function setupMarquee() {
-        if (!marquee || !trackTemplate) return;
-        
-        // Use the template to get the width so it never becomes 0
-        marquee.innerHTML = '';
-        marquee.appendChild(trackTemplate.cloneNode(true));
-        
-        const singleTrack = marquee.firstElementChild;
-        const trackWidth = singleTrack.offsetWidth;
+        // Duplicate the content for seamless looping
+        track.innerHTML += track.innerHTML;
 
-        if (trackWidth <= 0) return; // Safety check
+        let position = 0;
+        const speed = 5;  // Small value = ultra-smooth movement (adjust 0.5–1.5 for desired speed)
 
-        marquee.style.setProperty('--move-distance', `-${trackWidth}px`);
-        const clonesNeeded = Math.ceil(window.innerWidth / trackWidth) + 1;
+        const singleSetWidth = () => track.scrollWidth / 2;
 
-        // We already have 1, add the rest
-        for (let i = 0; i < clonesNeeded; i++) {
-                marquee.appendChild(trackTemplate.cloneNode(true));
+        function animate() {
+            position -= speed;
+
+            // Seamless reset: use modulo-like logic without jumping to 0
+            if (position <= -singleSetWidth()) {
+                position += singleSetWidth();  // Shift forward by exactly one set
             }
+
+            track.style.transform = `translateX(${position}px)`;
+            requestAnimationFrame(animate);
         }
 
-        // Use a debounce for resize to prevent crashing during window dragging
-        let resizeTimer;
-        window.addEventListener('resize', () => {
-            clearTimeout(resizeTimer);
-            resizeTimer = setTimeout(setupMarquee, 200);
-        });
-        window.addEventListener('load', setupMarquee);
-    </script>
+        animate();
+    });
+</script>
+
+
+
 </body>
 </html>
